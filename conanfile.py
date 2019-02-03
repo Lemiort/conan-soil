@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class SoilConan(ConanFile):
     name = "SOIL"
-    version = "1.0"
+    version = "1.1.0"
     license = "Public Domain"
     author = "Lemiort lemiort@gmail.com"
     url = "<Package recipe repository url here, for issues about the package>"
