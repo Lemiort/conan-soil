@@ -2,7 +2,7 @@ from conans import ConanFile, CMake, tools
 
 
 class SoilConan(ConanFile):
-    name = "SOIL"
+    name = "soil"
     version = "1.1.0"
     license = "Public Domain"
     author = "Lemiort lemiort@gmail.com"
@@ -13,6 +13,7 @@ class SoilConan(ConanFile):
     options = {"shared": [False]}
     default_options = "shared=False"
     generators = "cmake"
+    exports_sources = ["FindSOIL.cmake"]
 
     def source(self):
         self.run("git clone https://github.com/Lemiort/soil.git")
@@ -36,12 +37,13 @@ conan_basic_setup()''')
         # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
-        self.copy("*.h", dst="include", src="soil")
+        self.copy("*SOIL.h", dst="include/SOIL", src="soil", keep_path=False)
         self.copy("*soil.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("FindSOIL.cmake", ".", ".")
 
     def package_info(self):
         self.cpp_info.libs = ["soil"]

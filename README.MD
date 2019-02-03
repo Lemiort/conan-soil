@@ -6,14 +6,14 @@
 
 ### Basic setup
 
-    $ conan install soil/1.0@lemiort/stable
+    $ conan install soil/1.1.0@lemiort/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    soil/1.0@lemiort/stable
+    soil/1.1.0@lemiort/stable
 
     [generators]
     cmake
