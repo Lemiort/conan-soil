@@ -10,21 +10,20 @@ class SoilConan(ConanFile):
     description = "Conan package for Simple Opengl Image Library"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [False]}
+    options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
     exports_sources = ["FindSOIL.cmake"]
+    build_requires = "glew/2.1.0@bincrafters/stable"
 
     def source(self):
         self.run("git clone https://github.com/Lemiort/soil.git")
-        self.run("cd soil && git checkout master")
+        self.run("cd soil && git checkout develop")
         # This small hack might be useful to guarantee proper /MT /MD linkage
         # in MSVC if the packaged project doesn't have variables to set it
         # properly
-        tools.replace_in_file("soil/CMakeLists.txt", "project(${PROJECT_NAME} C)",
-                              '''project(${PROJECT_NAME} C)
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()''')
+        tools.replace_in_file("soil/CMakeLists.txt", "include(build/conanbuildinfo.cmake)",
+                              '''include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)''')
 
     def build(self):
         cmake = CMake(self)
