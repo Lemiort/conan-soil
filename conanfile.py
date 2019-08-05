@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class SoilConan(ConanFile):
     name = "soil"
-    version = "1.1.0"
+    version = "1.1.1"
     license = "Public Domain"
     author = "Lemiort lemiort@gmail.com"
     url = "<Package recipe repository url here, for issues about the package>"
@@ -37,7 +37,7 @@ class SoilConan(ConanFile):
 
     def package(self):
         self.copy("*SOIL.h", dst="include/SOIL", src="soil", keep_path=False)
-        self.copy("*soil.lib", dst="lib", keep_path=False)
+        self.copy("*SOIL.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
@@ -45,4 +45,4 @@ class SoilConan(ConanFile):
         self.copy("FindSOIL.cmake", ".", ".")
 
     def package_info(self):
-        self.cpp_info.libs = ["soil"]
+        self.cpp_info.libs = ["SOIL"]
